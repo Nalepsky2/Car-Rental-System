@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
-public class Reservation {
+public class Reservation implements Comparable<Reservation> {
     private final LocalDateTime start;
     private final LocalDateTime end;
 
@@ -29,5 +29,16 @@ public class Reservation {
 
     boolean isAfter(Reservation other) {
         return this.start.isAfter(other.end);
+    }
+
+    @Override
+    public int compareTo(Reservation other) {
+        if (this.isBefore(other)) {
+            return -1;
+        } else if (this.isAfter(other)) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
